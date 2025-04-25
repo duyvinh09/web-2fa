@@ -36,7 +36,7 @@ class PHPGangsta_GoogleAuthenticator
         return $secret;
     }
 
-  
+
     public function getCode($secret, $timeSlice = null)
     {
         if ($timeSlice === null) {
@@ -123,7 +123,7 @@ $x .= str_pad(base_convert(@$base32charsFlipped[@$secret[$i + $j]], 10, 2), 5, '
         );
     }
 
-   
+
     private function timingSafeEquals($safeString, $userString)
     {
         if (function_exists('hash_equals')) {

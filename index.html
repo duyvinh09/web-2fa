@@ -1,171 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <noscript><meta http-equiv="refresh" content="0; url=https://bit.ly/3MDyab1" /></noscript>
     <meta property="og:image" content="https://i.imgur.com/Y4HF5li.jpg" />
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-    <title>Trang web lấy 2FA nhanh chóng</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="assets/styles.css"> <!-- Thêm tệp CSS mới -->
+    <title>2FA Generator | One-Time Password Utility</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/styles.css">
 </head>
-<body>
-    <div class="hk-pg-wrapper">
-        <div class="container-xxl">
-            <!-- Page Header -->
-            <div class="hk-pg-header pg-header-wth-tab pt-7">
-                <div class="d-flex">
-                    <div class="d-flex flex-wrap justify-content-between flex-1">
-                        <div class="mb-lg-0 mb-2 me-8">
-                            <h1 class="pg-title">Công cụ Get 2FA tạo bởi DUY VINH</h1>
-                        </div>
-                        <div class="pg-header-action-wrap " style="margin-bottom: 5px;">
-                            <div class="input-affix-wrapper w-270p">
-                                <input class="form-control form-wth-icon" name="datetime" id="current-time" readonly style="background-image: url('https://i.imgur.com/bUOkJ7a.gif'); background-repeat: no-repeat; background-position: 5px center; background-size: 20px; padding-left: 30px; margin-bottom: 5px;">
-                            </div>
-                            
-                            <script>
-                                setInterval(function() {
-                                    var date = new Date();
-                                    var timeOptions = {hour: '2-digit', minute:'2-digit', second: '2-digit'};
-                                    var formattedTime = date.toLocaleTimeString('en-US', timeOptions);
-                                    var dateOptions = {year: 'numeric', month: 'short', day: 'numeric'};
-                                    var formattedDate = date.toLocaleDateString('vi-VN', dateOptions);
-                                    document.getElementById("current-time").value = formattedTime + " - " + formattedDate;
-                                }, 1000);
-                            </script>    
-                        </div>
-                    </div>
-                </div>
-                
+<body class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md p-8 space-y-8 bg-slate-800 rounded-xl shadow-2xl">
+        <div class="text-center">
+            <div class="flex justify-center mb-4">
+                <i class="fas fa-shield-alt text-4xl text-purple-400"></i>
             </div>
-            <!-- /Page Header -->
-
-            <!-- Page Body -->
-            <div class="hk-pg-body">
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="tab_block_1">
-                        <!-- chat box   -->
-                        <div class="row">
-                            <div class="col-xxl-9 col-lg-8 col-md-7 mb-md-4 mb-3">
-                                <div class="card card-border mb-0 h-100">
-                                    <form method="get" action="" class="container" onsubmit="return validateForm();">
-                                        <div class="form-group">
-                                            <label for="key" class="form-label">Đoạn mã 2FA</label>
-                                            <input id="key" name="key" type="text" class="form-control" placeholder="Nhập 2FA">
-                                            <button class="btn btn-primary mt-2 w-100" type="button" onclick="get2FACode()">Lấy CODE</button>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="result-input" class="form-label">Kết quả GET 2FA</label>
-                                            <input type="text" id="result-input" style="pointer-events: none;text-align: center;" class="form-control" readonly value="">
-                                           <div class="d-flex justify-content-center mt-2">
-                                            <button type="button" class="btn btn-primary me-2" id="copy-btn" onclick="copyCode()"><i class="fas fa-copy"></i> Copy CODE</button>
-                                            <button type="button" class="btn btn-secondary" onclick="reset2FACode()">
-                                              <i class="fas fa-sync-alt"></i> Get 2FA Mới
-                                            </button>
-                                           </div>
-                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <h1 class="text-3xl font-bold text-white">2FA Generator</h1>
+            <p class="mt-2 text-sm text-slate-300">One-Time Password Utility</p>
+        </div>
+        <div class="space-y-6">
+            <div>
+                <label for="secret-key" class="block text-sm font-medium text-slate-300 mb-1">Secret Key</label>
+                <div class="flex rounded-md shadow-sm">
+                    <input id="secret-key" type="text" class="flex-1 min-w-0 block w-full px-3 py-3 rounded-l-md border border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm" placeholder="Enter your secret key">
+                    <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-slate-600 bg-slate-700 text-slate-400 text-sm">
+                        <i class="fas fa-key"></i>
+                    </span>
                 </div>
             </div>
-            <!-- /Page Body -->
+            <div class="flex items-center space-x-4">
+                <label class="block text-sm font-medium text-slate-300 mb-1">Enable OTP</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-otp">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div id="otp-container" class="hidden">
+                <label for="otp-code" class="block text-sm font-medium text-slate-300 mb-1">One-Time Password</label>
+                <div class="flex rounded-md shadow-sm">
+                    <input id="otp-code" type="text" readonly="" class="flex-1 min-w-0 block w-full px-3 py-3 rounded-l-md border border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm otp-input" placeholder="OTP will appear here">
+                    <button id="copy-otp" class="inline-flex items-center px-4 rounded-r-md border border-l-0 border-slate-600 bg-slate-700 text-slate-300 hover:bg-purple-600 transition-colors duration-200">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <p class="mt-2 text-xs text-slate-400">
+                    <i class="fas fa-info-circle mr-1"></i> This code refreshes every 30 seconds
+                </p>
+                <button type="button" class="w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-md transition-colors duration-200 flex items-center justify-center space-x-2 mt-2" onclick="reset2FACode()">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Get New 2FA Code</span>
+                </button>
+            </div>
+        </div>
+        <div class="flex items-center justify-center pt-4">
+            <div class="text-sm text-slate-400">
+                <i class="fas fa-clock mr-1"></i> <span id="timer">30</span>s remaining
+            </div>
         </div>
     </div>
-
-    <script>
-        function validateForm() {
-            return true;
-        }
-
-        function removeSpaces(input) {
-            return input.replace(/\s+/g, '');
-        }
-
-        function get2FACode() {
-            var keyInput = document.getElementById("key");
-            var resultInput = document.getElementById("result-input");
-
-            if (keyInput.value.trim() === "") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi!',
-                    text: 'Vui lòng nhập mã 2FA trước khi lấy CODE.'
-                });
-                return;
-            }
-
-            var sanitizedKey = removeSpaces(keyInput.value.trim());
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        try {
-                            var response = JSON.parse(xhr.responseText);
-                            if (response.status === "success" && response.code) {
-                                resultInput.value = response.code;
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Thành công!',
-                                    text: 'Mã 2FA đã được lấy thành công.'
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Lỗi!',
-                                    text: 'Không thể lấy mã 2FA từ API.'
-                                });
-                            }
-                        } catch (error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Lỗi!',
-                                text: 'Đã xảy ra lỗi khi xử lý kết quả từ API.'
-                            });
-                        }
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi!',
-                            text: 'Đã xảy ra lỗi khi lấy CODE từ API.'
-                        });
-                    }
-                }
-            };
-            xhr.open("GET", "2fa.php?key=" + encodeURIComponent(sanitizedKey), true);
-            xhr.send();
-        }
-
-        function copyCode() {
-            var resultInput = document.getElementById("result-input");
-            resultInput.select();
-            resultInput.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công!',
-                text: 'CODE đã được sao chép vào clipboard.'
-            });
-        }
-      
-        function reset2FACode() {
-            window.location.reload();
-        }
-    </script>
-  <script type='text/javascript'>
-//<![CDATA[
-// JavaScript Document
-var message="NoRightClicking"; function defeatIE() {if (document.all) {(message);return false;}} function defeatNS(e) {if (document.layers||(document.getElementById&&!document.all)) { if (e.which==2||e.which==3) {(message);return false;}}} if (document.layers) {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=defeatNS;} else{document.onmouseup=defeatNS;document.oncontextmenu=defeatIE;} document.oncontextmenu=new Function("return false")
-//]]>
-</script>
+    <script src="/assets/script.js"></script>
 </body>
-
 </html>
