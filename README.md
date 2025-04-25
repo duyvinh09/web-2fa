@@ -1,7 +1,7 @@
 # Công Cụ Tiện Ích Chuyển Đổi Mã Xác Thực 2 Yếu Tố
 
 Công cụ này hỗ trợ chuyển đổi mã xác thực hai yếu tố (2FA) từ dạng chữ sang dạng số một cách nhanh chóng và tiện lợi. Giao diện hiện đại, đơn giản nhưng bắt mắt, được xây dựng với Tailwind CSS.
-
+![Preview Code](https://github.com/user-attachments/assets/90439ab0-b2d8-4b7b-b433-999015c1dc70)
 ## Tính Năng
 - Chuyển đổi mã 2FA từ dạng chữ sang dạng số.
 - Nút "Enable OTP" để bắt đầu quá trình chuyển đổi.
