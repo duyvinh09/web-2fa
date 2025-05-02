@@ -22,7 +22,7 @@
         </div>
         <div class="space-y-6">
             <div>
-                <label for="secret-key" class="block text-sm font-medium text-slate-300 mb-1">Secret Key</label>
+                <label for="secret-key" class="block text-sm font-medium text-slate-300 mb-1">2FA Secret</label>
                 <div class="flex rounded-md shadow-sm">
                     <input id="secret-key" type="text" class="flex-1 min-w-0 block w-full px-3 py-3 rounded-l-md border border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm" placeholder="Enter your secret key">
                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-slate-600 bg-slate-700 text-slate-400 text-sm">
@@ -38,7 +38,7 @@
                 </label>
             </div>
             <div id="otp-container" class="hidden">
-                <label for="otp-code" class="block text-sm font-medium text-slate-300 mb-1">One-Time Password</label>
+                <label for="otp-code" class="block text-sm font-medium text-slate-300 mb-1">2FA Code</label>
                 <div class="flex rounded-md shadow-sm">
                     <input id="otp-code" type="text" readonly="" class="flex-1 min-w-0 block w-full px-3 py-3 rounded-l-md border border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm otp-input" placeholder="OTP will appear here">
                     <button id="copy-otp" class="inline-flex items-center px-4 rounded-r-md border border-l-0 border-slate-600 bg-slate-700 text-slate-300 hover:bg-purple-600 transition-colors duration-200">

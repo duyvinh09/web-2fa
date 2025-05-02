@@ -7,7 +7,7 @@ class GoogleAuthenticator {
         this._codeLength = 6;
     }
 
-    createSecret(secretLength = 16) {
+    createSecret(secretLength = 16  ) {
         const validChars = this._getBase32LookupTable();
         if (secretLength < 16 || secretLength > 128) {
             throw new Error('Bad secret length');
@@ -139,7 +139,6 @@ document.getElementById('toggle-otp').addEventListener('change', function(e) {
     if (this.checked) {
         otpContainer.classList.remove('hidden');
         generateOTP();
-        startTimer();
     } else {
         otpContainer.classList.add('hidden');
         clearInterval(timerInterval);
@@ -205,6 +204,7 @@ function generateOTP() {
         document.getElementById('otp-container').classList.add('hidden');
         clearInterval(timerInterval);
         document.getElementById('timer').textContent = '30';
+        otpInput.value = '';
         return;
     }
 
@@ -213,6 +213,7 @@ function generateOTP() {
 
     authenticator.getCode(sanitizedKey).then(code => {
         otpInput.value = code;
+        startTimer();
     }).catch(error => {
         Swal.fire({
             icon: 'error',
